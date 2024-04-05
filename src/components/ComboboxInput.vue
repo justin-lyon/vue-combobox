@@ -2,17 +2,17 @@
 // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-autocomplete
 // https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
 // https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-both/
-import { defineProps, ref } from 'vue'
+import { ref } from 'vue'
 const props = defineProps(['options', 'label'])
 
 const searchTerm = ref(null)
 const isFocused = ref(false)
 
-function onFocus(event) {
+function onFocus() {
   isFocused.value = true
 }
 
-function onBlur(event) {
+function onBlur() {
   isFocused.value = false
 }
 </script>

@@ -1,5 +1,5 @@
 <script setup>
-import Combobox from './components/Combobox.vue'
+import ComboboxInput from './components/ComboboxInput.vue'
 
 const options = [
   {
@@ -19,7 +19,7 @@ const options = [
 
 <template>
   <main>
-    <Combobox :options="options" />
+    <ComboboxInput :options="options" />
   </main>
 </template>
 
