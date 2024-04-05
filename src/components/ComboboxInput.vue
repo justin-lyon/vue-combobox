@@ -2,8 +2,24 @@
 // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-autocomplete
 // https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
 // https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-both/
-import { ref } from 'vue'
-const props = defineProps(['options', 'label'])
+import SearchIcon from './icons/SearchIcon.vue'
+import ChevronLeftIcon from './icons/ChevronLeftIcon.vue'
+import CloseIcon from './icons/CloseIcon.vue'
+
+import { ref, computed } from 'vue'
+const props = defineProps({
+  options: {
+    type: Array,
+    required: true
+  },
+  label: {
+    type: String,
+    required: true
+  },
+  isLabelHidden: {
+    type: Boolean
+  }
+})
 
 const searchTerm = ref(null)
 const isFocused = ref(false)
@@ -15,17 +31,27 @@ function onFocus() {
 function onBlur() {
   isFocused.value = false
 }
+
+const isLabelHidden = computed(() => {
+  return props.labelType === 'hidden' ? 'hidden' : ''
+})
 </script>
 
 <template>
   <div class="combobox">
-    <label for="comboboxInput">Search</label>
     <div class="form">
+      <label
+        for="comboboxInput"
+        :aria-hidden="isLabelHidden"
+        :class="{ hidden: props.isLabelHidden }"
+      >
+        <SearchIcon class="medium" />
+      </label>
       <input
         id="comboboxInput"
         type="text"
         v-model="searchTerm"
-        placeholder="Search..."
+        placeholder="🔎 Search..."
         aria-controls="optionsList"
         aria-autocomplete="both"
         aria-expanded=""
@@ -35,29 +61,8 @@ function onBlur() {
         :onblur="onBlur"
       />
       <button>
-        <!-- Arrow Left Icon `<` -->
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="0.75rem"
-          height="0.75rem"
-          viewBox="0 0 24 24"
-        >
-          <path fill="currentColor" fill-rule="evenodd" d="m15 4l2 2l-6 6l6 6l-2 2l-8-8z" />
-        </svg>
-        <!-- Close Icon `X` -->
-        <!-- <svg
-          v-if="isFocused"
-          xmlns="http://www.w3.org/2000/svg"
-          width="0.75rem"
-          height="0.75rem"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            fill-rule="evenodd"
-            d="M10.657 12.071L5 6.414L6.414 5l5.657 5.657L17.728 5l1.414 1.414l-5.657 5.657l5.657 5.657l-1.414 1.414l-5.657-5.657l-5.657 5.657L5 17.728z"
-          />
-        </svg> -->
+        <ChevronLeftIcon class="medium" />
+        <CloseIcon class="medium" :class="{ hidden: isFocused.value }" />
       </button>
     </div>
     <ul id="optionsList" class="listbox" role="listbox" aria-label="listbox options">
@@ -67,3 +72,14 @@ function onBlur() {
     </ul>
   </div>
 </template>
+
+<style scoped>
+.medium {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.hidden {
+  display: none;
+}
+</style>

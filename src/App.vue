@@ -19,7 +19,7 @@ const options = [
 
 <template>
   <main>
-    <ComboboxInput :options="options" />
+    <ComboboxInput :options="options" label="Pokemon Search" is-label-hidden />
   </main>
 </template>
 
