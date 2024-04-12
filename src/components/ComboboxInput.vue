@@ -97,7 +97,7 @@ const vFocus = {
 }
 
 const vClickOutside = {
-  beforeMount(el) {
+  beforeMount(el, binding) {
     el.clickOutside = (event) => {
       if (!el.contains(event.target)) {
         isListBoxOpen.value = false
@@ -112,7 +112,7 @@ const vClickOutside = {
 </script>
 
 <template>
-  <div class="combobox" v-click-outside="vClickOutside">
+  <div class="combobox" v-click-outside>
     <div class="input-container">
       <div class="stretch">
         <label
@@ -127,7 +127,7 @@ const vClickOutside = {
           ref="inputEl"
           type="text"
           v-model="searchTerm"
-          v-focus="vFocus"
+          v-focus
           placeholder="🔎 Search..."
           aria-controls="optionsList"
           aria-autocomplete="both"
@@ -164,6 +164,9 @@ const vClickOutside = {
 </template>
 
 <style scoped>
+:root {
+}
+
 .combobox {
   position: relative;
 }
@@ -184,15 +187,15 @@ const vClickOutside = {
 
 .input-container {
   border: 1px solid grey;
-  border-radius: 0.25rem;
+  border-radius: var(--border-radius);
 }
 
 input {
-  border-radius: 0.25rem 0 0 0.25rem;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
 
 .btn-chevron {
-  border-radius: 0 0.25rem 0.25rem 0;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 .combobox button.btn-chevron[aria-expanded='true'] svg {
@@ -202,7 +205,7 @@ input {
 input,
 ul {
   width: 100%;
-  background-color: var(--background);
+  background-color: var(--background-color);
 }
 
 input,
@@ -217,7 +220,7 @@ ul {
   position: absolute;
   margin-top: 0.25rem;
   border: 1px solid grey;
-  border-radius: 0.25rem;
+  border-radius: var(--border-radius);
 }
 
 li {
