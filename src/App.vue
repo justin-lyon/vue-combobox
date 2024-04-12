@@ -57,7 +57,6 @@ const options = [
   margin: 0 auto;
   margin-top: 2rem;
   width: 50%;
-  height: 100vh;
   /* border: 1px solid yellow; */
 }
 

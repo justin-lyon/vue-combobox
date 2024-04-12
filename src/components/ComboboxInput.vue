@@ -21,7 +21,8 @@ const props = defineProps({
   }
 })
 
-const searchTerm = ref(null)
+const inputEl = ref(null)
+const searchTerm = ref('')
 const isFocused = ref(false)
 const isListBoxOpen = ref(false)
 
@@ -49,18 +50,33 @@ function onArrowUp() {
 
 function onEnter() {
   console.log('enter')
-  searchTerm.value = 'selectedOption.value'
-  isListBoxOpen.value = false
+  if (isListBoxOpen.value) {
+    searchTerm.value = 'selectedOption.value'
+    isListBoxOpen.value = false
+    return
+  }
 }
 
 function onEscape() {
-  console.log('escape')
-  isListBoxOpen.value = false
+  if (isListBoxOpen.value) {
+    isListBoxOpen.value = false
+    return
+  }
+  searchTerm.value = ''
+}
+
+function onClearClicked() {
+  searchTerm.value = ''
+  inputEl.value.focus()
 }
 
 function onChevronClicked() {
   isListBoxOpen.value = !isListBoxOpen.value
 }
+
+const isClearShown = computed(() => {
+  return typeof searchTerm.value === 'string' && searchTerm.value.length > 0
+})
 
 const isLabelHidden = computed(() => {
   return props.labelType === 'hidden' ? 'hidden' : ''
@@ -80,6 +96,7 @@ const isLabelHidden = computed(() => {
         </label>
         <input
           id="comboboxInput"
+          ref="inputEl"
           type="text"
           v-model="searchTerm"
           placeholder="🔎 Search..."
@@ -96,7 +113,7 @@ const isLabelHidden = computed(() => {
           :onblur="onBlur"
         />
       </div>
-      <button class="" :class="{ hidden: !isListBoxOpen }">
+      <button class="" :class="{ hidden: !isClearShown }" @click="onClearClicked">
         <CloseIcon />
       </button>
       <button class="btn-chevron" :aria-expanded="isListBoxOpen" @click="onChevronClicked">
