@@ -4,43 +4,43 @@ import ComboboxInput from './components/ComboboxInput.vue'
 const options = [
   {
     name: 'Bulbasaur',
-    value: 1
+    id: 1
   },
   {
     name: 'Ivysaur',
-    value: 2
+    id: 2
   },
   {
     name: 'Venasaur',
-    value: 3
+    id: 3
   },
   {
     name: 'Charmander',
-    value: 4
+    id: 4
   },
   {
     name: 'Charmeleon',
-    value: 5
+    id: 5
   },
   {
     name: 'Charizard',
-    value: 6
+    id: 6
   },
   {
     name: 'Squirtle',
-    value: 7
+    id: 7
   },
   {
     name: 'Wartortle',
-    value: 8
+    id: 8
   },
   {
     name: 'Blastoise',
-    value: 9
+    id: 9
   },
   {
     name: 'Caterpie',
-    value: 10
+    id: 10
   }
 ]
 </script>
@@ -56,7 +56,7 @@ const options = [
 .container {
   margin: 0 auto;
   margin-top: 2rem;
-  width: 50%;
+  width: 70%;
   /* border: 1px solid yellow; */
 }
 

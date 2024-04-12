@@ -25,6 +25,14 @@ const inputEl = ref(null)
 const searchTerm = ref('')
 const isFocused = ref(false)
 const isListBoxOpen = ref(false)
+const listItems = ref(
+  props.options.map(({ name, id }) => ({
+    label: name,
+    value: id,
+    selected: false
+  }))
+)
+listItems.value[0].selected = true
 
 function onFocus() {
   isFocused.value = true
@@ -81,10 +89,30 @@ const isClearShown = computed(() => {
 const isLabelHidden = computed(() => {
   return props.labelType === 'hidden' ? 'hidden' : ''
 })
+
+const vFocus = {
+  mounted(el) {
+    el.focus()
+  }
+}
+
+const vClickOutside = {
+  beforeMount(el) {
+    el.clickOutside = (event) => {
+      if (!el.contains(event.target)) {
+        isListBoxOpen.value = false
+      }
+    }
+    document.addEventListener('click', el.clickOutside)
+  },
+  unmounted(el) {
+    document.removeEventListener('click', el.clickOutside)
+  }
+}
 </script>
 
 <template>
-  <div class="combobox">
+  <div class="combobox" v-click-outside="vClickOutside">
     <div class="input-container">
       <div class="stretch">
         <label
@@ -99,6 +127,7 @@ const isLabelHidden = computed(() => {
           ref="inputEl"
           type="text"
           v-model="searchTerm"
+          v-focus="vFocus"
           placeholder="🔎 Search..."
           aria-controls="optionsList"
           aria-autocomplete="both"
@@ -127,8 +156,8 @@ const isLabelHidden = computed(() => {
       role="listbox"
       aria-label="listbox options"
     >
-      <li v-for="item in props.options" v-bind:key="item.value" role="option">
-        {{ item.name }}
+      <li v-for="item in listItems" v-bind:key="item.value" role="option">
+        {{ item.label }}
       </li>
     </ul>
   </div>
@@ -193,6 +222,8 @@ ul {
 
 li {
   list-style-type: none;
+  user-select: none;
+  cursor: pointer;
 }
 
 li:hover {
