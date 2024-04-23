@@ -117,9 +117,9 @@ function onChevronClicked() {
   isListBoxOpen.value = !isListBoxOpen.value
 }
 
-const hasSearchTerm = () => {
+const hasSearchTerm = computed(() => {
   return typeof searchTerm.value === 'string' && searchTerm.value.length > 0
-}
+})
 
 const isLabelHidden = computed(() => {
   return props.labelType === 'hidden' ? 'hidden' : ''
