@@ -29,15 +29,7 @@ const inputEl = ref(null)
 const searchTerm = ref('')
 const isFocused = ref(false)
 const isListBoxOpen = ref(false)
-const listItems = ref(
-  props.options.map(({ name, id }) => ({
-    label: name,
-    value: id,
-    isActive: false,
-    selected: false
-  }))
-)
-listItems.value[0].isActive = true
+const listItems = ref(mapToItems(props.options))
 const activeItem = ref(listItems.value[0].value)
 
 function onFocus() {
@@ -56,6 +48,15 @@ function onKeyup(event) {
 
   if (!isListBoxOpen.value) {
     isListBoxOpen.value = true
+  }
+
+  if (typeof searchTerm.value === 'string' && searchTerm.value.length > 0) {
+    const filtered = props.options.filter((o) => o.name.toLowerCase().includes(searchTerm.value))
+    listItems.value = mapToItems(filtered)
+  }
+
+  if (typeof searchTerm.value === 'string' && searchTerm.value.length === 0) {
+    reset()
   }
 }
 
@@ -105,12 +106,11 @@ function onEscape() {
     isListBoxOpen.value = false
     return
   }
-  searchTerm.value = ''
+  reset()
 }
 
 function onClearClicked() {
-  searchTerm.value = ''
-  activeItem.value = listItems.value[0]?.value
+  reset()
 }
 
 function onChevronClicked() {
@@ -143,6 +143,19 @@ const vClickOutside = {
   unmounted(el) {
     document.removeEventListener('click', el.clickOutside)
   }
+}
+
+function mapToItems(options) {
+  return options.map(({ name, id }) => ({
+    label: name,
+    value: id
+  }))
+}
+
+function reset() {
+  searchTerm.value = ''
+  listItems.value = mapToItems(props.options)
+  activeItem.value = listItems.value[0]?.value
 }
 </script>
 
