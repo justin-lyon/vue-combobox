@@ -29,10 +29,12 @@ const listItems = ref(
   props.options.map(({ name, id }) => ({
     label: name,
     value: id,
+    isActive: false,
     selected: false
   }))
 )
-listItems.value[0].selected = true
+listItems.value[0].isActive = true
+const activeItem = ref(listItems.value[0].value)
 
 function onFocus() {
   isFocused.value = true
@@ -42,11 +44,30 @@ function onBlur() {
   isFocused.value = false
 }
 
+function onKeyup(event) {
+  const capturedCodes = ['ArrowUp', 'ArrowDown', 'Enter', 'Escape']
+  if (capturedCodes.includes(event.code)) {
+    return
+  }
+
+  if (!isListBoxOpen.value) {
+    isListBoxOpen.value = true
+  }
+}
+
 function onArrowDown() {
   if (!isListBoxOpen.value) {
     isListBoxOpen.value = true
     return
   }
+  let activeIndex = listItems.value.findIndex((item) => item.value === activeItem.value)
+  activeIndex++
+
+  if (activeIndex === listItems.value.length) {
+    activeIndex = 0
+  }
+
+  activeItem.value = listItems.value[activeIndex].value
 }
 
 function onArrowUp() {
@@ -54,28 +75,39 @@ function onArrowUp() {
     isListBoxOpen.value = true
     return
   }
+
+  let activeIndex = listItems.value.findIndex((item) => item.value === activeItem.value)
+  activeIndex--
+
+  if (activeIndex === -1) {
+    activeIndex = listItems.value.length - 1
+  }
+
+  activeItem.value = listItems.value[activeIndex].value
 }
 
 function onEnter() {
   console.log('enter')
   if (isListBoxOpen.value) {
-    searchTerm.value = 'selectedOption.value'
+    const selected = listItems.value.find((item) => item.value === activeItem.value)
+    searchTerm.value = selected.label
     isListBoxOpen.value = false
     return
   }
 }
 
 function onEscape() {
+  searchTerm.value = ''
+
   if (isListBoxOpen.value) {
     isListBoxOpen.value = false
     return
   }
-  searchTerm.value = ''
 }
 
 function onClearClicked() {
   searchTerm.value = ''
-  inputEl.value.focus()
+  activeItem.value = listItems.value[0]?.value
 }
 
 function onChevronClicked() {
@@ -131,22 +163,28 @@ const vClickOutside = {
           placeholder="🔎 Search..."
           aria-controls="optionsList"
           aria-autocomplete="both"
-          aria-expanded=""
-          data-active-option=""
-          aria-activedescendant=""
-          @keyup.prevent.up="onArrowUp"
-          @keyup.prevent.down="onArrowDown"
-          @keyup.prevent.enter="onEnter"
-          @keyup.prevent.esc="onEscape"
+          :aria-expanded="isListBoxOpen"
+          :data-active-option="activeItem"
+          :aria-activedescendant="activeItem"
+          @keyup="onKeyup"
+          @keyup.up="onArrowUp"
+          @keyup.down="onArrowDown"
+          @keyup.enter="onEnter"
+          @keyup.esc="onEscape"
           :onfocus="onFocus"
           :onblur="onBlur"
         />
       </div>
-      <button class="" :class="{ hidden: !isClearShown }" @click="onClearClicked">
+      <button tabindex="-1" :class="{ hidden: !isClearShown }" @click="onClearClicked">
         <CloseIcon />
       </button>
-      <button class="btn-chevron" :aria-expanded="isListBoxOpen" @click="onChevronClicked">
-        <ChevronLeftIcon :class="{ open: isListBoxOpen }" />
+      <button
+        tabindex="-1"
+        class="btn-chevron"
+        :aria-expanded="isListBoxOpen"
+        @click="onChevronClicked"
+      >
+        <ChevronLeftIcon />
       </button>
     </div>
     <ul
@@ -156,7 +194,12 @@ const vClickOutside = {
       role="listbox"
       aria-label="listbox options"
     >
-      <li v-for="item in listItems" v-bind:key="item.value" role="option">
+      <li
+        v-for="item in listItems"
+        v-bind:key="item.value"
+        role="option"
+        :class="{ selected: item.value === activeItem }"
+      >
         {{ item.label }}
       </li>
     </ul>
@@ -230,6 +273,11 @@ li {
 }
 
 li:hover {
+  background-color: var(--selected);
+  color: var(--font-selected-color);
+}
+
+li.selected {
   background-color: var(--selected);
   color: var(--font-selected-color);
 }
