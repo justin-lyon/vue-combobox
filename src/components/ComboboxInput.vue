@@ -50,7 +50,7 @@ function onKeyup(event) {
     isListBoxOpen.value = true
   }
 
-  if (hasSearchTerm()) {
+  if (hasSearchTerm.value) {
     const filtered = props.options.filter((o) => o.name.toLowerCase().includes(searchTerm.value))
     listItems.value = mapToItems(filtered)
   }
