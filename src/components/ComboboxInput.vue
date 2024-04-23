@@ -207,9 +207,6 @@ const vClickOutside = {
 </template>
 
 <style scoped>
-:root {
-}
-
 .combobox {
   position: relative;
 }
