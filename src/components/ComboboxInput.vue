@@ -16,6 +16,10 @@ const props = defineProps({
     type: String,
     required: true
   },
+  placeholder: {
+    type: String,
+    default: '🔎 Search...'
+  },
   isLabelHidden: {
     type: Boolean
   }
@@ -97,12 +101,11 @@ function onEnter() {
 }
 
 function onEscape() {
-  searchTerm.value = ''
-
   if (isListBoxOpen.value) {
     isListBoxOpen.value = false
     return
   }
+  searchTerm.value = ''
 }
 
 function onClearClicked() {
@@ -160,7 +163,7 @@ const vClickOutside = {
           type="text"
           v-model="searchTerm"
           v-focus
-          placeholder="🔎 Search..."
+          :placeholder="placeholder"
           aria-controls="optionsList"
           aria-autocomplete="both"
           :aria-expanded="isListBoxOpen"
@@ -175,12 +178,21 @@ const vClickOutside = {
           :onblur="onBlur"
         />
       </div>
-      <button tabindex="-1" :class="{ hidden: !isClearShown }" @click="onClearClicked">
+      <button
+        tabindex="-1"
+        aria-controls="optionsList"
+        aria-label="Clear Input"
+        :aria-expanded="isListBoxOpen"
+        :class="{ hidden: !isClearShown }"
+        @click="onClearClicked"
+      >
         <CloseIcon />
       </button>
       <button
         tabindex="-1"
         class="btn-chevron"
+        aria-controls="optionsList"
+        aria-label="Show/Hide List"
         :aria-expanded="isListBoxOpen"
         @click="onChevronClicked"
       >
