@@ -50,7 +50,7 @@ function onKeyup(event) {
     isListBoxOpen.value = true
   }
 
-  if (typeof searchTerm.value === 'string' && searchTerm.value.length > 0) {
+  if (hasSearchTerm()) {
     const filtered = props.options.filter((o) => o.name.toLowerCase().includes(searchTerm.value))
     listItems.value = mapToItems(filtered)
   }
@@ -117,9 +117,9 @@ function onChevronClicked() {
   isListBoxOpen.value = !isListBoxOpen.value
 }
 
-const isClearShown = computed(() => {
+const hasSearchTerm = () => {
   return typeof searchTerm.value === 'string' && searchTerm.value.length > 0
-})
+}
 
 const isLabelHidden = computed(() => {
   return props.labelType === 'hidden' ? 'hidden' : ''
@@ -196,7 +196,7 @@ function reset() {
         aria-controls="optionsList"
         aria-label="Clear Input"
         :aria-expanded="isListBoxOpen"
-        :class="{ hidden: !isClearShown }"
+        :class="{ hidden: !hasSearchTerm }"
         @click="onClearClicked"
       >
         <CloseIcon />
