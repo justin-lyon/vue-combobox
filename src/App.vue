@@ -1,5 +1,4 @@
 <script setup>
-import MiniSearch from 'minisearch'
 import ComboboxInput from './components/ComboboxInput.vue'
 
 const options = [
