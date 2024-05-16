@@ -1,5 +1,5 @@
 <script setup>
-import ComboboxInput from './components/ComboboxInput.vue'
+import ComboboxInput from '../lib/ComboboxInput.vue'
 
 const options = [
   {

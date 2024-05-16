@@ -243,6 +243,16 @@ function reset() {
   </div>
 </template>
 
+<style>
+:root {
+  --vue-combobox-background-color: #1c1b22;
+  --vue-combobox-selected: #fff;
+  --vue-combobox-font-color: var(--vue-combobox-selected);
+  --vue-combobox-font-selected-color: var(--vue-combobox-background-color);
+  --vue-combobox-border-radius: 0.5rem;
+}
+</style>
+
 <style scoped>
 .combobox {
   position: relative;
