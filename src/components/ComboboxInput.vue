@@ -92,11 +92,8 @@ function onArrowUp() {
 }
 
 function onEnter() {
-  console.log('enter')
   if (isListBoxOpen.value) {
-    const selected = listItems.value.find((item) => item.value === activeItem.value)
-    searchTerm.value = selected.label
-    isListBoxOpen.value = false
+    setSelected(activeItem.value)
     return
   }
 }
@@ -117,6 +114,10 @@ function onChevronClicked() {
   isListBoxOpen.value = !isListBoxOpen.value
 }
 
+function onClickOption(event) {
+  setSelected(event.target.dataset.key)
+}
+
 const hasSearchTerm = computed(() => {
   return typeof searchTerm.value === 'string' && searchTerm.value.length > 0
 })
@@ -132,7 +133,7 @@ const vFocus = {
 }
 
 const vClickOutside = {
-  beforeMount(el, binding) {
+  beforeMount(el) {
     el.clickOutside = (event) => {
       if (!el.contains(event.target)) {
         isListBoxOpen.value = false
@@ -143,6 +144,14 @@ const vClickOutside = {
   unmounted(el) {
     document.removeEventListener('click', el.clickOutside)
   }
+}
+
+function setSelected(id) {
+  const selected = listItems.value.find((item) => item.value === id)
+  searchTerm.value = selected.label
+  activeItem.value = selected.value
+  isListBoxOpen.value = false
+  inputEl.value.focus()
 }
 
 function mapToItems(options) {
@@ -177,8 +186,9 @@ function reset() {
           v-model="searchTerm"
           v-focus
           :placeholder="placeholder"
+          :aria-label="label"
           aria-controls="optionsList"
-          aria-autocomplete="both"
+          aria-autocomplete="list"
           :aria-expanded="isListBoxOpen"
           :data-active-option="activeItem"
           :aria-activedescendant="activeItem"
@@ -222,6 +232,8 @@ function reset() {
       <li
         v-for="item in listItems"
         v-bind:key="item.value"
+        :data-key="item.value"
+        @click="onClickOption"
         role="option"
         :class="{ selected: item.value === activeItem }"
       >

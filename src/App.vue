@@ -1,46 +1,47 @@
 <script setup>
+import MiniSearch from 'minisearch'
 import ComboboxInput from './components/ComboboxInput.vue'
 
 const options = [
   {
     name: 'Bulbasaur',
-    id: 1
+    id: '1'
   },
   {
     name: 'Ivysaur',
-    id: 2
+    id: '2'
   },
   {
     name: 'Venasaur',
-    id: 3
+    id: '3'
   },
   {
     name: 'Charmander',
-    id: 4
+    id: '4'
   },
   {
     name: 'Charmeleon',
-    id: 5
+    id: '5'
   },
   {
     name: 'Charizard',
-    id: 6
+    id: '6'
   },
   {
     name: 'Squirtle',
-    id: 7
+    id: '7'
   },
   {
     name: 'Wartortle',
-    id: 8
+    id: '8'
   },
   {
     name: 'Blastoise',
-    id: 9
+    id: '9'
   },
   {
     name: 'Caterpie',
-    id: 10
+    id: '10'
   }
 ]
 </script>
