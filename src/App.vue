@@ -3,44 +3,44 @@ import ComboboxInput from '../lib/ComboboxInput.vue'
 
 const options = [
   {
-    name: 'Bulbasaur',
-    id: '1'
+    label: 'Bulbasaur',
+    value: '1'
   },
   {
-    name: 'Ivysaur',
-    id: '2'
+    label: 'Ivysaur',
+    value: '2'
   },
   {
-    name: 'Venasaur',
-    id: '3'
+    label: 'Venasaur',
+    value: '3'
   },
   {
-    name: 'Charmander',
-    id: '4'
+    label: 'Charmander',
+    value: '4'
   },
   {
-    name: 'Charmeleon',
-    id: '5'
+    label: 'Charmeleon',
+    value: '5'
   },
   {
-    name: 'Charizard',
-    id: '6'
+    label: 'Charizard',
+    value: '6'
   },
   {
-    name: 'Squirtle',
-    id: '7'
+    label: 'Squirtle',
+    value: '7'
   },
   {
-    name: 'Wartortle',
-    id: '8'
+    label: 'Wartortle',
+    value: '8'
   },
   {
-    name: 'Blastoise',
-    id: '9'
+    label: 'Blastoise',
+    value: '9'
   },
   {
-    name: 'Caterpie',
-    id: '10'
+    label: 'Caterpie',
+    value: '10'
   }
 ]
 </script>

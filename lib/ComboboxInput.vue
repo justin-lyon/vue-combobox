@@ -10,11 +10,17 @@ import { ref, computed } from 'vue'
 const props = defineProps({
   options: {
     type: Array,
+    default: () => {
+      throw new Error('attribute `options` is required')
+    },
     required: true
   },
   label: {
     type: String,
-    required: true
+    required: true,
+    default: () => {
+      throw new Error('attribute `label` is required.')
+    }
   },
   placeholder: {
     type: String,
@@ -29,8 +35,8 @@ const inputEl = ref(null)
 const searchTerm = ref('')
 const isFocused = ref(false)
 const isListBoxOpen = ref(false)
-const listItems = ref(mapToItems(props.options))
-const activeItem = ref(listItems.value[0].value)
+const listItems = ref([...props.options])
+const activeItem = ref(listItems.value[0]?.value)
 
 function onFocus() {
   isFocused.value = true
@@ -51,8 +57,8 @@ function onKeyup(event) {
   }
 
   if (hasSearchTerm.value) {
-    const filtered = props.options.filter((o) => o.name.toLowerCase().includes(searchTerm.value))
-    listItems.value = mapToItems(filtered)
+    const filtered = props.options.filter((o) => o.label.toLowerCase().includes(searchTerm.value))
+    listItems.value = [...filtered]
   }
 
   if (typeof searchTerm.value === 'string' && searchTerm.value.length === 0) {
@@ -154,16 +160,9 @@ function setSelected(id) {
   inputEl.value.focus()
 }
 
-function mapToItems(options) {
-  return options.map(({ name, id }) => ({
-    label: name,
-    value: id
-  }))
-}
-
 function reset() {
   searchTerm.value = ''
-  listItems.value = mapToItems(props.options)
+  listItems.value = [...props.options]
   activeItem.value = listItems.value[0]?.value
 }
 </script>
