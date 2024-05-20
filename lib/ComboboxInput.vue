@@ -207,6 +207,7 @@ function reset() {
           @keyup.esc="onEscape"
           :onfocus="onFocus"
           :onblur="onBlur"
+          data-test="input"
         />
       </div>
       <button
