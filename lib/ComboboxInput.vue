@@ -71,6 +71,11 @@ function onArrowDown() {
     isListBoxOpen.value = true
     return
   }
+
+  if (listItems.value.length === 0) {
+    return
+  }
+
   let activeIndex = listItems.value.findIndex((item) => item.value === activeItem.value)
   activeIndex++
 
@@ -84,6 +89,10 @@ function onArrowDown() {
 function onArrowUp() {
   if (!isListBoxOpen.value) {
     isListBoxOpen.value = true
+    return
+  }
+
+  if (listItems.value.length === 0) {
     return
   }
 
@@ -207,6 +216,7 @@ function reset() {
         :aria-expanded="isListBoxOpen"
         :class="{ hidden: !hasSearchTerm }"
         @click="onClearClicked"
+        data-test="clearButton"
       >
         <CloseIcon />
       </button>
@@ -217,6 +227,7 @@ function reset() {
         aria-label="Show/Hide List"
         :aria-expanded="isListBoxOpen"
         @click="onChevronClicked"
+        data-test="chevronButton"
       >
         <ChevronLeftIcon />
       </button>
@@ -227,6 +238,7 @@ function reset() {
       :class="{ hidden: !isListBoxOpen }"
       role="listbox"
       aria-label="listbox options"
+      data-test="listbox"
     >
       <li
         v-for="item in listItems"
@@ -235,6 +247,7 @@ function reset() {
         @click="onClickOption"
         role="option"
         :class="{ selected: item.value === activeItem }"
+        data-test="listitem"
       >
         {{ item.label }}
       </li>
@@ -242,15 +255,7 @@ function reset() {
   </div>
 </template>
 
-<style>
-:root {
-  --vue-combobox-background-color: #1c1b22;
-  --vue-combobox-selected: #fff;
-  --vue-combobox-font-color: var(--vue-combobox-selected);
-  --vue-combobox-font-selected-color: var(--vue-combobox-background-color);
-  --vue-combobox-border-radius: 0.5rem;
-}
-</style>
+<style></style>
 
 <style scoped>
 .combobox {

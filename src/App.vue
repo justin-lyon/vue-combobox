@@ -13,35 +13,35 @@ const options = [
   {
     label: 'Venasaur',
     value: '3'
-  },
-  {
-    label: 'Charmander',
-    value: '4'
-  },
-  {
-    label: 'Charmeleon',
-    value: '5'
-  },
-  {
-    label: 'Charizard',
-    value: '6'
-  },
-  {
-    label: 'Squirtle',
-    value: '7'
-  },
-  {
-    label: 'Wartortle',
-    value: '8'
-  },
-  {
-    label: 'Blastoise',
-    value: '9'
-  },
-  {
-    label: 'Caterpie',
-    value: '10'
   }
+  // {
+  //   label: 'Charmander',
+  //   value: '4'
+  // },
+  // {
+  //   label: 'Charmeleon',
+  //   value: '5'
+  // },
+  // {
+  //   label: 'Charizard',
+  //   value: '6'
+  // },
+  // {
+  //   label: 'Squirtle',
+  //   value: '7'
+  // },
+  // {
+  //   label: 'Wartortle',
+  //   value: '8'
+  // },
+  // {
+  //   label: 'Blastoise',
+  //   value: '9'
+  // },
+  // {
+  //   label: 'Caterpie',
+  //   value: '10'
+  // }
 ]
 </script>
 
@@ -51,6 +51,16 @@ const options = [
     <div>Other Content</div>
   </main>
 </template>
+
+<style>
+:root {
+  --vue-combobox-background-color: #1c1b22;
+  --vue-combobox-selected: #fff;
+  --vue-combobox-font-color: var(--vue-combobox-selected);
+  --vue-combobox-font-selected-color: var(--vue-combobox-background-color);
+  --vue-combobox-border-radius: 0.5rem;
+}
+</style>
 
 <style scoped>
 .container {
