@@ -48,10 +48,10 @@ function onBlur() {
 
 function onKeyup(event) {
   const capturedCodes = ['ArrowUp', 'ArrowDown', 'Enter', 'Escape']
-  console.log('event', { key: event.key, code: event.code, keyCode: event.keyCode })
-  // console.log('event.key', `(${event.key})`)
-  // console.log('event.code', `(${event.code})`)
-  // console.log('event.keyCode', `(${event.keyCode})`)
+  /**
+   * Should be using event.code as recommended by MDN, but vue test utils emits
+   * incorrect data for keyboard codes.
+   */
   if (capturedCodes.includes(event.key)) {
     return
   }
@@ -71,7 +71,6 @@ function onKeyup(event) {
 }
 
 function onArrowDown() {
-  // console.log(event.key, event.keyCode, event.code)
   if (!isListBoxOpen.value) {
     isListBoxOpen.value = true
     return
@@ -118,8 +117,7 @@ function onEnter() {
   }
 }
 
-function onEscape(event) {
-  console.log('event', { key: event.key, code: event.code, keyCode: event.keyCode })
+function onEscape() {
   if (isListBoxOpen.value) {
     isListBoxOpen.value = false
     return
