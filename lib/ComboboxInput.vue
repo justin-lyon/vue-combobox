@@ -48,7 +48,11 @@ function onBlur() {
 
 function onKeyup(event) {
   const capturedCodes = ['ArrowUp', 'ArrowDown', 'Enter', 'Escape']
-  if (capturedCodes.includes(event.code)) {
+  console.log('event', { key: event.key, code: event.code, keyCode: event.keyCode })
+  // console.log('event.key', `(${event.key})`)
+  // console.log('event.code', `(${event.code})`)
+  // console.log('event.keyCode', `(${event.keyCode})`)
+  if (capturedCodes.includes(event.key)) {
     return
   }
 
@@ -67,6 +71,7 @@ function onKeyup(event) {
 }
 
 function onArrowDown() {
+  // console.log(event.key, event.keyCode, event.code)
   if (!isListBoxOpen.value) {
     isListBoxOpen.value = true
     return
@@ -113,7 +118,8 @@ function onEnter() {
   }
 }
 
-function onEscape() {
+function onEscape(event) {
+  console.log('event', { key: event.key, code: event.code, keyCode: event.keyCode })
   if (isListBoxOpen.value) {
     isListBoxOpen.value = false
     return
@@ -200,11 +206,11 @@ function reset() {
           :aria-expanded="isListBoxOpen"
           :data-active-option="activeItem"
           :aria-activedescendant="activeItem"
-          @keyup="onKeyup"
           @keyup.up="onArrowUp"
           @keyup.down="onArrowDown"
           @keyup.enter="onEnter"
           @keyup.esc="onEscape"
+          @keyup="onKeyup"
           :onfocus="onFocus"
           :onblur="onBlur"
           data-test="input"
