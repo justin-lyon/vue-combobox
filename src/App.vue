@@ -1,5 +1,5 @@
 <script setup>
-import ComboboxInput from '../lib/ComboboxInput.vue'
+import VuenillaCombobox from '../lib/VuenillaCombobox.vue'
 
 const options = [
   {
@@ -47,7 +47,7 @@ const options = [
 
 <template>
   <main class="container">
-    <ComboboxInput :options="options" label="Pokemon Search" is-label-hidden />
+    <VuenillaCombobox :options="options" label="Pokemon Search" is-label-hidden />
     <div>Other Content</div>
   </main>
 </template>
