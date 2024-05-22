@@ -295,10 +295,6 @@ input::placeholder {
   opacity: 50%;
 }
 
-.btn-chevron {
-  /* border-radius: 0 var(--vue-combobox-border-radius) var(--vue-combobox-border-radius) 0; */
-}
-
 .combobox button.btn-chevron[aria-expanded='true'] svg {
   transform: rotate(270deg) translate(0, 0);
 }
