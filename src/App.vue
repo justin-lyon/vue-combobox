@@ -55,8 +55,8 @@ const options = [
 <style>
 :root {
   --vue-combobox-background-color: #1c1b22;
-  --vue-combobox-selected: #fff;
-  --vue-combobox-font-color: var(--vue-combobox-selected);
+  --vue-combobox-selected-background-color: #fff;
+  --vue-combobox-font-color: var(--vue-combobox-selected-background-color);
   --vue-combobox-font-selected-color: var(--vue-combobox-background-color);
   --vue-combobox-border-radius: 0.5rem;
 }
@@ -67,7 +67,6 @@ const options = [
   margin: 0 auto;
   margin-top: 2rem;
   width: 70%;
-  /* border: 1px solid yellow; */
 }
 
 main {

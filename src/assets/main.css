@@ -1,13 +1,5 @@
 @import './base.css';
 
-:root {
-  --background-color: #1c1b22;
-  --selected: #fff;
-  --font-color: var(--selected);
-  --font-selected-color: var(--background-color);
-  --border-radius: 0.5rem;
-}
-
 body {
   font-family:
     system-ui,

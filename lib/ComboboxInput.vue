@@ -260,11 +260,10 @@ function reset() {
   </div>
 </template>
 
-<style></style>
-
 <style scoped>
 .combobox {
   position: relative;
+  color: var(--vue-combobox-font-color);
 }
 
 .combobox .input-container {
@@ -283,15 +282,21 @@ function reset() {
 
 .input-container {
   border: 1px solid grey;
-  border-radius: var(--border-radius);
+  border-radius: var(--vue-combobox-border-radius);
+  overflow: hidden;
 }
 
-input {
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
+input,
+input::placeholder {
+  color: var(--vue-combobox-font-color);
+}
+::placeholder {
+  color: var(--vue-combobox-font-color);
+  opacity: 50%;
 }
 
 .btn-chevron {
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  /* border-radius: 0 var(--vue-combobox-border-radius) var(--vue-combobox-border-radius) 0; */
 }
 
 .combobox button.btn-chevron[aria-expanded='true'] svg {
@@ -301,7 +306,7 @@ input {
 input,
 ul {
   width: 100%;
-  background-color: var(--background-color);
+  background-color: var(--vue-combobox-background-color);
 }
 
 input,
@@ -316,7 +321,7 @@ ul {
   position: absolute;
   margin-top: 0.25rem;
   border: 1px solid grey;
-  border-radius: var(--border-radius);
+  border-radius: var(--vue-combobox-border-radius);
 }
 
 li {
@@ -326,12 +331,12 @@ li {
 }
 
 li:hover {
-  background-color: var(--selected);
-  color: var(--font-selected-color);
+  background-color: var(--vue-combobox-selected-background-color);
+  color: var(--vue-combobox-font-selected-color);
 }
 
 li.selected {
-  background-color: var(--selected);
-  color: var(--font-selected-color);
+  background-color: var(--vue-combobox-selected-background-color);
+  color: var(--vue-combobox-font-selected-color);
 }
 </style>
