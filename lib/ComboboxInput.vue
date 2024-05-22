@@ -28,6 +28,10 @@ const props = defineProps({
   },
   isLabelHidden: {
     type: Boolean
+  },
+  maxDisplayRows: {
+    type: Number,
+    default: () => 10
   }
 })
 
@@ -61,7 +65,9 @@ function onKeyup(event) {
   }
 
   if (hasSearchTerm.value) {
-    const filtered = props.options.filter((o) => o.label.toLowerCase().includes(searchTerm.value))
+    const filtered = props.options
+      .filter((o) => o.label.toLowerCase().includes(searchTerm.value))
+      .slice(0, props.maxDisplayRows)
     listItems.value = [...filtered]
   }
 
@@ -175,7 +181,7 @@ function setSelected(id) {
 
 function reset() {
   searchTerm.value = ''
-  listItems.value = [...props.options]
+  listItems.value = [...props.options].slice(0, props.maxDisplayRows)
   activeItem.value = listItems.value[0]?.value
 }
 </script>
