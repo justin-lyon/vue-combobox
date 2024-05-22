@@ -13,35 +13,35 @@ const options = [
   {
     label: 'Venasaur',
     value: '3'
+  },
+  {
+    label: 'Charmander',
+    value: '4'
+  },
+  {
+    label: 'Charmeleon',
+    value: '5'
+  },
+  {
+    label: 'Charizard',
+    value: '6'
+  },
+  {
+    label: 'Squirtle',
+    value: '7'
+  },
+  {
+    label: 'Wartortle',
+    value: '8'
+  },
+  {
+    label: 'Blastoise',
+    value: '9'
+  },
+  {
+    label: 'Caterpie',
+    value: '10'
   }
-  // {
-  //   label: 'Charmander',
-  //   value: '4'
-  // },
-  // {
-  //   label: 'Charmeleon',
-  //   value: '5'
-  // },
-  // {
-  //   label: 'Charizard',
-  //   value: '6'
-  // },
-  // {
-  //   label: 'Squirtle',
-  //   value: '7'
-  // },
-  // {
-  //   label: 'Wartortle',
-  //   value: '8'
-  // },
-  // {
-  //   label: 'Blastoise',
-  //   value: '9'
-  // },
-  // {
-  //   label: 'Caterpie',
-  //   value: '10'
-  // }
 ]
 </script>
 

@@ -1,35 +1,11 @@
-# combobox
+# vuenilla-combobox
 
-This template should help get you started developing with Vue 3 in Vite.
+A vue 3 combobox that inherits the styles from your style system of choice. Some assembly required.
 
-## Recommended IDE Setup
+## Public Properties
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Public properties available to customize the combobox.
 
-## Customize configuration
+## CSS Properties
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+Assign values to these CSS Properties in order to share your styles with the combobox.
