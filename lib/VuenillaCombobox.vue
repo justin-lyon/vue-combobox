@@ -66,7 +66,7 @@ function onKeyup(event) {
 
   if (hasSearchTerm.value) {
     const filtered = props.options
-      .filter((o) => o.label.toLowerCase().includes(searchTerm.value))
+      .filter((o) => o.label.toLowerCase().includes(searchTerm.value.toLowerCase()))
       .slice(0, props.maxDisplayRows)
     listItems.value = [...filtered]
   }
