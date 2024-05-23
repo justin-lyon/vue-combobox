@@ -307,6 +307,13 @@ input::placeholder {
 
 input {
   height: 100%;
+  border-top-left-radius: var(--vue-combobox-border-radius);
+  border-bottom-left-radius: var(--vue-combobox-border-radius);
+}
+
+.btn-chevron {
+  border-top-right-radius: var(--vue-combobox-border-radius);
+  border-bottom-right-radius: var(--vue-combobox-border-radius);
 }
 
 input,
