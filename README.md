@@ -2,6 +2,34 @@
 
 A vue 3 combobox that inherits the styles from your style system of choice. Some assembly required.
 
+## Usage
+
+```vue
+<script setup>
+import { VuenillaCombobox } from 'vuenilla-combobox'
+import 'vuenilla-combobox/dist/style.css'
+</script>
+
+<template>
+  <VuenillaCombobox
+    label="Pokemon"
+    placeholder="🔎 Pokemon..."
+    is-label-hidden
+    :options="options"
+  />
+</template>
+
+<style>
+:root {
+  --vue-combobox-background-color: #1c1b22;
+  --vue-combobox-selected-background-color: #fff;
+  --vue-combobox-font-color: var(--vue-combobox-selected-background-color);
+  --vue-combobox-font-selected-color: var(--vue-combobox-background-color);
+  --vue-combobox-border-radius: 0.5rem;
+}
+</style>
+```
+
 ## Public Properties
 
 Public properties available to customize the combobox.
