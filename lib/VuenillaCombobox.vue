@@ -305,6 +305,10 @@ input::placeholder {
   transform: rotate(270deg) translate(0, 0);
 }
 
+input {
+  height: 100%;
+}
+
 input,
 ul {
   width: 100%;
