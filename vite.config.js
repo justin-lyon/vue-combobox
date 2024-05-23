@@ -15,8 +15,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'lib/main.js'),
-      name: 'vue-combobox',
-      fileName: 'VuenillaCombobox'
+      name: 'vuenilla-combobox',
+      fileName: (format) => `vuenilla-combobox.${format}.js`
     },
     rollupOptions: {
       external: ['vue'],

@@ -1,15 +1,15 @@
 {
     "name": "vuenilla-combobox",
-    "version": "0.0.3",
+    "version": "1.0.0",
     "type": "module",
     "files": [
         "dist"
     ],
     "main": "./dist/vuenilla-combobox.umd.cjs",
-    "module": "./dist/vuenilla-combobox.mjs",
+    "module": "./dist/vuenilla-combobox.es.js",
     "exports": {
         ".": {
-            "import": "./dist/vuenilla-combobox.mjs",
+            "import": "./dist/vuenilla-combobox.es.js",
             "require": "./dist/vuenilla-combobox.umd.cjs"
         },
         "./dist/style.css": "./dist/style.css"
